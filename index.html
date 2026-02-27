@@ -155,16 +155,20 @@
   /* CERTIFICATIONS */
   .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
 
+  .cert-item,
+  .cert-accordion {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; transition: border-color 0.2s, transform 0.15s;
+  }
+  .cert-item:hover,
+  .cert-accordion:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .cert-accordion.open { border-color: var(--accent); transform: none; }
+
   .cert-item {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 1rem 1.2rem; background: var(--card);
-    border: 1px solid var(--border); border-radius: 8px; gap: 1rem;
+    padding: 1rem 1.2rem; gap: 1rem; min-height: 64px;
     text-decoration: none; color: inherit;
-    transition: border-color 0.2s, transform 0.15s;
   }
-  .cert-item:hover { border-color: var(--accent); transform: translateY(-1px); }
-  .cert-item.no-link { cursor: default; }
-  .cert-item.no-link:hover { transform: none; border-color: var(--border); }
 
   .cert-name { font-size: 14px; font-weight: 500; }
   .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 0.2rem; }
@@ -175,19 +179,13 @@
   }
 
   /* ACCORDION */
-  .cert-accordion {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 8px; overflow: hidden;
-  }
-  .cert-accordion.open { border-color: var(--accent); }
+  .cert-accordion { overflow: hidden; }
 
   .cert-accordion-trigger {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 1.2rem; background: none; border: none; cursor: pointer;
-    color: inherit; text-align: left; gap: 1rem;
-    transition: background 0.15s;
+    color: inherit; text-align: left; gap: 1rem; min-height: 64px;
   }
-  .cert-accordion-trigger:hover { background: rgba(255,255,255,0.02); }
 
   .trigger-left { flex: 1; min-width: 0; }
   .trigger-right { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
@@ -674,7 +672,7 @@
     <h2 class="contact-heading">Let's connect.</h2>
     <p class="contact-sub">Open to full-time roles, internships, and interesting data projects.</p>
     <div class="contact-links">
-      <a href="mailto:rmuzhoffar@gmail.com" class="btn btn-primary">rmuzhoffar@gmail.com</a>
+      <a href="/cdn-cgi/l/email-protection#6c1e01191604030a0a0d1e2c0b010d0500420f0301" class="btn btn-primary"><span class="__cf_email__" data-cfemail="82f0eff7f8eaede4e4e3f0c2e5efe3ebeeace1edef">[email&#160;protected]</span></a>
       <a href="https://linkedin.com/in/rifqi-sm" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
       <a href="https://github.com/Muzhoffar" target="_blank" class="btn btn-ghost">GitHub ↗</a>
     </div>
@@ -683,12 +681,4 @@
 
 <footer>© 2026 Rifqi Sirojul Muzhoffar</footer>
 
-<script>
-  function toggleAccordion(id) {
-    const acc = document.getElementById(id);
-    acc.classList.toggle('open');
-  }
-</script>
-
-</body>
-</html>
+<script data-cf
