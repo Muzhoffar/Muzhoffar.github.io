@@ -41,6 +41,7 @@
   .blob-1 { width: 600px; height: 600px; background: rgba(108,143,255,0.07); top: -200px; left: -200px; }
   .blob-2 { width: 500px; height: 500px; background: rgba(255,108,157,0.04); bottom: -100px; right: -100px; }
 
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     display: flex; justify-content: space-between; align-items: center;
@@ -56,6 +57,7 @@
 
   section { position: relative; z-index: 1; }
 
+  /* HERO */
   #hero {
     min-height: 100vh; display: flex; align-items: center;
     padding: 8rem 3rem 4rem; max-width: 900px; margin: 0 auto;
@@ -90,6 +92,7 @@
   .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
   .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
 
+  /* SECTIONS */
   .section-wrap { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
   .section-label {
     font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
@@ -100,6 +103,7 @@
     font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 3rem; letter-spacing: -0.01em;
   }
 
+  /* PROJECTS */
   .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
   .project-card {
     background: var(--card); border: 1px solid var(--border);
@@ -117,12 +121,10 @@
   .project-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .tag { background: var(--tag-bg); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; padding: 0.25rem 0.7rem; border-radius: 4px; border: 1px solid var(--border); }
-
   .project-img {
     background: var(--surface); border-left: 1px solid var(--border);
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 0.8rem; padding: 2rem; color: var(--muted); text-align: center;
-    position: relative; overflow: hidden;
+    gap: 0.8rem; padding: 2rem; text-align: center; position: relative; overflow: hidden;
   }
   .project-img::before {
     content: ''; position: absolute; inset: 0;
@@ -131,6 +133,7 @@
   .img-icon { font-size: 2rem; opacity: 0.25; position: relative; }
   .img-hint { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); opacity: 0.45; line-height: 1.6; position: relative; }
 
+  /* TIMELINE */
   .timeline { display: flex; flex-direction: column; }
   .timeline-item {
     display: grid; grid-template-columns: 160px 1fr;
@@ -142,25 +145,27 @@
   .timeline-org { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 0.6rem; letter-spacing: 0.04em; }
   .timeline-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
+  /* SKILLS */
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
   .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
   .skill-category { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.8rem; }
   .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .skill-pill { background: var(--tag-bg); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 0.2rem 0.6rem; border-radius: 4px; }
 
-  /* ── CERTIFICATIONS ── */
+  /* CERTIFICATIONS */
   .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
 
   .cert-item {
     display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 1.2rem; background: var(--card);
     border: 1px solid var(--border); border-radius: 8px; gap: 1rem;
-  }
-  .cert-link {
     text-decoration: none; color: inherit;
     transition: border-color 0.2s, transform 0.15s;
   }
-  .cert-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .cert-item:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .cert-item.no-link { cursor: default; }
+  .cert-item.no-link:hover { transform: none; border-color: var(--border); }
+
   .cert-name { font-size: 14px; font-weight: 500; }
   .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 0.2rem; }
   .cert-badge {
@@ -169,36 +174,39 @@
     padding: 0.2rem 0.6rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
   }
 
-  /* accordion */
+  /* ACCORDION */
   .cert-accordion {
     background: var(--card); border: 1px solid var(--border);
     border-radius: 8px; overflow: hidden;
-    transition: border-color 0.2s;
   }
-  .cert-accordion:focus-within, .cert-accordion.open { border-color: var(--accent); }
+  .cert-accordion.open { border-color: var(--accent); }
 
-  .cert-accordion-header {
+  .cert-accordion-trigger {
     width: 100%; display: flex; justify-content: space-between; align-items: center;
     padding: 1rem 1.2rem; background: none; border: none; cursor: pointer;
     color: inherit; text-align: left; gap: 1rem;
     transition: background 0.15s;
   }
-  .cert-accordion-header:hover { background: rgba(255,255,255,0.02); }
+  .cert-accordion-trigger:hover { background: rgba(255,255,255,0.02); }
 
-  .accordion-right { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+  .trigger-left { flex: 1; min-width: 0; }
+  .trigger-right { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+
   .accordion-arrow {
-    font-size: 14px; color: var(--muted);
-    transition: transform 0.25s; display: inline-block;
+    font-size: 13px; color: var(--muted);
+    transition: transform 0.25s ease; display: inline-block;
   }
   .cert-accordion.open .accordion-arrow { transform: rotate(180deg); }
 
   .cert-accordion-body {
     max-height: 0; overflow: hidden;
-    transition: max-height 0.3s ease;
-    border-top: 0px solid var(--border);
+    transition: max-height 0.35s ease;
   }
   .cert-accordion.open .cert-accordion-body {
-    max-height: 600px;
+    max-height: 800px;
+  }
+
+  .cert-accordion-inner {
     border-top: 1px solid var(--border);
   }
 
@@ -210,12 +218,12 @@
     transition: background 0.15s;
   }
   .cert-sub-item:last-child { border-bottom: none; }
-  .cert-sub-item:hover { background: rgba(108,143,255,0.04); }
-
+  .cert-sub-item:hover { background: rgba(108,143,255,0.05); }
   .cert-sub-name { font-size: 13px; color: var(--text); flex: 1; }
-  .cert-sub-issuer { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .cert-sub-meta { font-size: 12px; color: var(--muted); white-space: nowrap; }
   .cert-sub-arrow { font-size: 12px; color: var(--accent); flex-shrink: 0; }
 
+  /* CONTACT */
   #contact { border-top: 1px solid var(--border); text-align: center; }
   .contact-heading { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
   .contact-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; }
@@ -247,6 +255,7 @@
 <div class="blob blob-1"></div>
 <div class="blob blob-2"></div>
 
+<!-- NAV -->
 <nav>
   <a class="nav-logo" href="#">RSM.DEV</a>
   <ul class="nav-links">
@@ -254,6 +263,7 @@
     <li><a href="#experience">Experience</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#certs">Certs</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -267,7 +277,7 @@
     <div class="hero-links">
       <a href="#projects" class="btn btn-primary">View Projects</a>
       <a href="https://linkedin.com/in/rifqi-sm" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-      <a href="https://github.com/" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+      <a href="https://github.com/Muzhoffar" target="_blank" class="btn btn-ghost">GitHub ↗</a>
     </div>
   </div>
 </section>
@@ -297,7 +307,6 @@
           </div>
           <div class="project-img">
             <div class="img-icon">📊</div>
-            <!-- Replace with: <img src="images/kimia-farma.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/> -->
             <p class="img-hint">images/kimia-farma.png</p>
           </div>
         </div>
@@ -428,7 +437,6 @@
     <p class="section-label">Background</p>
     <h2>Experience</h2>
     <div class="timeline">
-
       <div class="timeline-item">
         <div class="timeline-date">Feb 2026</div>
         <div>
@@ -437,7 +445,6 @@
           <div class="timeline-desc">Built a credit risk prediction model using Python. Performed EDA, feature engineering, model training, and evaluation on customer credit data.</div>
         </div>
       </div>
-
       <div class="timeline-item">
         <div class="timeline-date">Jan – Feb 2026</div>
         <div>
@@ -446,16 +453,14 @@
           <div class="timeline-desc">Analyzed sales transaction data using SQL on BigQuery. Built a KPI dashboard on Looker Studio. Achieved Excellent grade (94.9/100).</div>
         </div>
       </div>
-
       <div class="timeline-item">
         <div class="timeline-date">Sep – Dec 2024</div>
         <div>
           <div class="timeline-role">Machine Learning Cohort</div>
-          <div class="timeline-org">Bangkit Academy by Google, GoTo & Traveloka — Remote</div>
+          <div class="timeline-org">Bangkit Academy by Google, GoTo &amp; Traveloka — Remote</div>
           <div class="timeline-desc">Completed an intensive ML training program with avg. score 90.30/100 and 100% attendance. Developed a Computer Vision capstone with a cross-disciplinary team.</div>
         </div>
       </div>
-
       <div class="timeline-item">
         <div class="timeline-date">Sep – Oct 2023</div>
         <div>
@@ -464,7 +469,6 @@
           <div class="timeline-desc">Completed a full UX design cycle in Figma: user flow, wireframing, competitor analysis, and high-fidelity prototype. Final project score: 89.5/100.</div>
         </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -547,8 +551,8 @@
     <h2>Certifications</h2>
     <div class="cert-list">
 
-      <!-- BNSP -->
-      <a href="https://drive.google.com/your-bnsp-link" target="_blank" class="cert-item cert-link">
+      <!-- BNSP — ganti href dengan link Google Drive kamu -->
+      <a href="https://drive.google.com/your-bnsp-link" target="_blank" class="cert-item">
         <div>
           <div class="cert-name">Associate Data Scientist</div>
           <div class="cert-issuer">BNSP — Badan Nasional Sertifikasi Profesi</div>
@@ -556,102 +560,106 @@
         <span class="cert-badge">Valid · Mar 2028 ↗</span>
       </a>
 
-      <!-- TOEFL -->
-      <a href="https://drive.google.com/your-toefl-link" target="_blank" class="cert-item cert-link">
+      <!-- TOEFL — ganti href dengan link Google Drive kamu -->
+      <a href="https://drive.google.com/your-toefl-link" target="_blank" class="cert-item">
         <div>
           <div class="cert-name">TOEFL ITP — Score: 520</div>
           <div class="cert-issuer">One Stop English Education</div>
         </div>
-        <span class="cert-badge">English ↗</span>
+        <span class="cert-badge">Score: 520 ↗</span>
       </a>
 
       <!-- COURSERA ACCORDION -->
-      <div class="cert-accordion">
-        <button class="cert-accordion-header" onclick="toggleAccordion(this)">
-          <div>
+      <div class="cert-accordion" id="acc-coursera">
+        <button class="cert-accordion-trigger" onclick="toggleAccordion('acc-coursera')">
+          <div class="trigger-left">
             <div class="cert-name">Coursera</div>
-            <div class="cert-issuer">10+ courses — Stanford University, DeepLearning.AI, Google</div>
+            <div class="cert-issuer">Stanford University, DeepLearning.AI, Google</div>
           </div>
-          <div class="accordion-right">
+          <div class="trigger-right">
             <span class="cert-badge">ML · Data · Cloud</span>
             <span class="accordion-arrow">↓</span>
           </div>
         </button>
         <div class="cert-accordion-body">
-          <!-- Ganti # dengan URL verifikasi Coursera kamu -->
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Machine Learning Specialization</span>
-            <span class="cert-sub-issuer">Stanford University & DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">TensorFlow: Advanced Techniques Specialization</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Mathematics for ML and Data Science Specialization</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">TensorFlow Data and Deployment</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">DeepLearning.AI TensorFlow Developer</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Build Basic Generative Adversarial Networks</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Structuring Machine Learning Projects</span>
-            <span class="cert-sub-issuer">DeepLearning.AI</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Intro to Generative AI</span>
-            <span class="cert-sub-issuer">Google Cloud</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Google IT Automation with Python</span>
-            <span class="cert-sub-issuer">Google</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
+          <div class="cert-accordion-inner">
+            <!-- Ganti setiap href="#" dengan URL verifikasi Coursera kamu -->
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Machine Learning Specialization</span>
+              <span class="cert-sub-meta">Stanford &amp; DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">TensorFlow: Advanced Techniques Specialization</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Mathematics for ML and Data Science Specialization</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">TensorFlow Data and Deployment</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">DeepLearning.AI TensorFlow Developer</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Build Basic Generative Adversarial Networks</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Structuring Machine Learning Projects</span>
+              <span class="cert-sub-meta">DeepLearning.AI</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Intro to Generative AI</span>
+              <span class="cert-sub-meta">Google Cloud</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Google IT Automation with Python</span>
+              <span class="cert-sub-meta">Google</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+          </div>
         </div>
       </div>
 
       <!-- DICODING ACCORDION -->
-      <div class="cert-accordion">
-        <button class="cert-accordion-header" onclick="toggleAccordion(this)">
-          <div>
+      <div class="cert-accordion" id="acc-dicoding">
+        <button class="cert-accordion-trigger" onclick="toggleAccordion('acc-dicoding')">
+          <div class="trigger-left">
             <div class="cert-name">Dicoding</div>
-            <div class="cert-issuer">10+ courses — Machine Learning, Data Analysis, and more</div>
+            <div class="cert-issuer">Machine Learning, Data Analysis, and more</div>
           </div>
-          <div class="accordion-right">
-            <span class="cert-badge">Active</span>
+          <div class="trigger-right">
+            <span class="cert-badge">10+ Courses</span>
             <span class="accordion-arrow">↓</span>
           </div>
         </button>
         <div class="cert-accordion-body">
-          <!-- Ganti # dengan URL sertifikat Dicoding kamu -->
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Belajar Analisis Data dengan Python</span>
-            <span class="cert-sub-issuer">Valid until Oct 2027</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <a href="#" target="_blank" class="cert-sub-item">
-            <span class="cert-sub-name">Belajar Machine Learning untuk Pemula</span>
-            <span class="cert-sub-issuer">Valid until Jan 2029</span>
-            <span class="cert-sub-arrow">↗</span>
-          </a>
-          <!-- Tambahkan sertifikat Dicoding lainnya di sini dengan format yang sama -->
+          <div class="cert-accordion-inner">
+            <!-- Ganti setiap href="#" dengan URL sertifikat Dicoding kamu -->
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Belajar Analisis Data dengan Python</span>
+              <span class="cert-sub-meta">Valid until Oct 2027</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <a href="#" target="_blank" class="cert-sub-item">
+              <span class="cert-sub-name">Belajar Machine Learning untuk Pemula</span>
+              <span class="cert-sub-meta">Valid until Jan 2029</span>
+              <span class="cert-sub-arrow">↗</span>
+            </a>
+            <!-- Tambahkan kursus Dicoding lainnya di sini -->
+          </div>
         </div>
       </div>
 
@@ -666,12 +674,21 @@
     <h2 class="contact-heading">Let's connect.</h2>
     <p class="contact-sub">Open to full-time roles, internships, and interesting data projects.</p>
     <div class="contact-links">
-      <a href="/cdn-cgi/l/email-protection#c8baa5bdb2a0a7aeaea9ba88afa5a9a1a4e6aba7a5" class="btn btn-primary"><span class="__cf_email__" data-cfemail="20524d555a484f4646415260474d41494c0e434f4d">[email&#160;protected]</span></a>
+      <a href="mailto:rmuzhoffar@gmail.com" class="btn btn-primary">rmuzhoffar@gmail.com</a>
       <a href="https://linkedin.com/in/rifqi-sm" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
-      <a href="https://github.com/" target="_blank
+      <a href="https://github.com/Muzhoffar" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 Rifqi Sirojul Muzhoffar</footer>
+
 <script>
-  function toggleAccordion(btn) {
-    const acc = btn.closest('.cert-accordion');
+  function toggleAccordion(id) {
+    const acc = document.getElementById(id);
     acc.classList.toggle('open');
   }
 </script>
+
+</body>
+</html>
