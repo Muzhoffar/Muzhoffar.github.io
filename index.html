@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rifqi Sirojul Muzhoffar — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --card: #16161f;
+    --border: #24242f;
+    --accent: #6c8fff;
+    --text: #e8e8f0;
+    --muted: #7070a0;
+    --tag-bg: #1e1e2e;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+
+  .blob { position: fixed; border-radius: 50%; filter: blur(120px); pointer-events: none; z-index: 0; }
+  .blob-1 { width: 600px; height: 600px; background: rgba(108,143,255,0.07); top: -200px; left: -200px; }
+  .blob-2 { width: 500px; height: 500px; background: rgba(255,108,157,0.04); bottom: -100px; right: -100px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); letter-spacing: 0.08em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.05em; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+
+  section { position: relative; z-index: 1; }
+
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 3rem 4rem; max-width: 900px; margin: 0 auto;
+  }
+  .hero-inner { width: 100%; }
+  .hero-label {
+    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.1s forwards;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 8vw, 5.5rem); line-height: 1.05;
+    letter-spacing: -0.02em; margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.2s forwards;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted); max-width: 520px; margin-bottom: 2.5rem;
+    opacity: 0; animation: fadeUp 0.6s 0.3s forwards;
+  }
+  .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.6s 0.4s forwards; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.4rem; border-radius: 6px; font-size: 13px;
+    font-weight: 500; letter-spacing: 0.03em; text-decoration: none;
+    transition: all 0.2s; border: none; cursor: pointer;
+  }
+  .btn-primary { background: var(--accent); color: #0a0a0f; }
+  .btn-primary:hover { background: #8aaaff; transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .section-wrap { max-width: 900px; margin: 0 auto; padding: 5rem 3rem; }
+  .section-label {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.8rem;
+  }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 3rem; letter-spacing: -0.01em;
+  }
+
+  .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; transition: border-color 0.2s, transform 0.2s;
+  }
+  .project-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .project-card-inner { display: grid; grid-template-columns: 1fr 300px; }
+  .project-content { padding: 2rem; }
+  .project-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.1em; margin-bottom: 0.8rem; }
+  .project-title { font-family: 'DM Serif Display', serif; font-size: 1.35rem; margin-bottom: 0.4rem; line-height: 1.3; }
+  .project-company { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 1rem; letter-spacing: 0.04em; }
+  .project-desc { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 1.2rem; }
+  .project-highlights { list-style: none; margin-bottom: 1.5rem; }
+  .project-highlights li { font-size: 13px; color: var(--text); padding: 0.25rem 0 0.25rem 1.2rem; position: relative; }
+  .project-highlights li::before { content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 11px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag { background: var(--tag-bg); color: var(--muted); font-family: 'DM Mono', monospace; font-size: 11px; padding: 0.25rem 0.7rem; border-radius: 4px; border: 1px solid var(--border); }
+
+  .project-img {
+    background: var(--surface); border-left: 1px solid var(--border);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.8rem; padding: 2rem; color: var(--muted); text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .project-img::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.01) 20px, rgba(255,255,255,0.01) 21px);
+  }
+  .img-icon { font-size: 2rem; opacity: 0.25; position: relative; }
+  .img-hint { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); opacity: 0.45; line-height: 1.6; position: relative; }
+
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item {
+    display: grid; grid-template-columns: 160px 1fr;
+    gap: 2rem; padding: 2rem 0; border-bottom: 1px solid var(--border);
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-date { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; padding-top: 0.2rem; }
+  .timeline-role { font-weight: 600; font-size: 15px; margin-bottom: 0.2rem; }
+  .timeline-org { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--accent); margin-bottom: 0.6rem; letter-spacing: 0.04em; }
+  .timeline-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; }
+  .skill-category { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .skill-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-pill { background: var(--tag-bg); border: 1px solid var(--border); color: var(--text); font-size: 12px; padding: 0.2rem 0.6rem; border-radius: 4px; }
+
+  /* ── CERTIFICATIONS ── */
+  .cert-list { display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .cert-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: var(--card);
+    border: 1px solid var(--border); border-radius: 8px; gap: 1rem;
+  }
+  .cert-link {
+    text-decoration: none; color: inherit;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .cert-link:hover { border-color: var(--accent); transform: translateY(-1px); }
+  .cert-name { font-size: 14px; font-weight: 500; }
+  .cert-issuer { font-size: 12px; color: var(--muted); margin-top: 0.2rem; }
+  .cert-badge {
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--accent);
+    background: rgba(108,143,255,0.08); border: 1px solid rgba(108,143,255,0.15);
+    padding: 0.2rem 0.6rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+  }
+
+  /* accordion */
+  .cert-accordion {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px; overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .cert-accordion:focus-within, .cert-accordion.open { border-color: var(--accent); }
+
+  .cert-accordion-header {
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.2rem; background: none; border: none; cursor: pointer;
+    color: inherit; text-align: left; gap: 1rem;
+    transition: background 0.15s;
+  }
+  .cert-accordion-header:hover { background: rgba(255,255,255,0.02); }
+
+  .accordion-right { display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0; }
+  .accordion-arrow {
+    font-size: 14px; color: var(--muted);
+    transition: transform 0.25s; display: inline-block;
+  }
+  .cert-accordion.open .accordion-arrow { transform: rotate(180deg); }
+
+  .cert-accordion-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease;
+    border-top: 0px solid var(--border);
+  }
+  .cert-accordion.open .cert-accordion-body {
+    max-height: 600px;
+    border-top: 1px solid var(--border);
+  }
+
+  .cert-sub-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.75rem 1.2rem;
+    text-decoration: none; color: inherit;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .cert-sub-item:last-child { border-bottom: none; }
+  .cert-sub-item:hover { background: rgba(108,143,255,0.04); }
+
+  .cert-sub-name { font-size: 13px; color: var(--text); flex: 1; }
+  .cert-sub-issuer { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .cert-sub-arrow { font-size: 12px; color: var(--accent); flex-shrink: 0; }
+
+  #contact { border-top: 1px solid var(--border); text-align: center; }
+  .contact-heading { font-family: 'DM Serif Display', serif; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 1rem; }
+  .contact-sub { color: var(--muted); font-size: 1rem; margin-bottom: 2.5rem; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .contact-links { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  footer {
+    position: relative; z-index: 1; text-align: center; padding: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    #hero, .section-wrap { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .project-card-inner { grid-template-columns: 1fr; }
+    .project-img { display: none; }
+    .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="blob blob-1"></div>
+<div class="blob blob-2"></div>
+
+<nav>
+  <a class="nav-logo" href="#">RSM.DEV</a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Data · ML · Analytics</p>
+    <h1>Rifqi Sirojul<br/><em>Muzhoffar</em></h1>
+    <p class="hero-desc">Informatics Engineering graduate with a focus on data analytics and machine learning. I turn messy data into clear insights and working models.</p>
+    <div class="hero-links">
+      <a href="#projects" class="btn btn-primary">View Projects</a>
+      <a href="https://linkedin.com/in/rifqi-sm" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/" target="_blank" class="btn btn-ghost">GitHub ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <p class="section-label">Work</p>
+    <h2>Selected Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">01 — Big Data Analytics</p>
+            <h3 class="project-title">Business Performance &amp; Sales Analysis</h3>
+            <p class="project-company">Kimia Farma × Rakamin Academy · 2026</p>
+            <p class="project-desc">Analyzed Kimia Farma's sales transaction data to surface revenue trends, branch profitability, and business performance insights.</p>
+            <ul class="project-highlights">
+              <li>Queried and transformed multi-table datasets using SQL on BigQuery</li>
+              <li>Built KPI dashboard (Net Sales, Net Profit, Branch Rating) in Looker Studio</li>
+              <li>Achieved Excellent grade — 94.9/100</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">SQL</span><span class="tag">BigQuery</span><span class="tag">Looker Studio</span><span class="tag">Data Analytics</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">📊</div>
+            <!-- Replace with: <img src="images/kimia-farma.png" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"/> -->
+            <p class="img-hint">images/kimia-farma.png</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">02 — NLP / Thesis</p>
+            <h3 class="project-title">Aspect-Based Sentiment Analysis — by.U App</h3>
+            <p class="project-company">Undergraduate Thesis · Mar – Aug 2025</p>
+            <p class="project-desc">Built an ABSA system to classify sentiment per aspect from thousands of Google Play Store reviews using topic modeling and machine learning.</p>
+            <ul class="project-highlights">
+              <li>LDA for aspect extraction, SVM for sentiment classification</li>
+              <li>Interactive Streamlit web app for real-time per-aspect analysis</li>
+              <li>Full pipeline: data collection → preprocessing → model → deployment</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">LDA</span><span class="tag">SVM</span><span class="tag">Streamlit</span><span class="tag">NLP</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">🤖</div>
+            <p class="img-hint">images/skripsi.png</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">03 — Machine Learning</p>
+            <h3 class="project-title">Credit Risk Prediction Model</h3>
+            <p class="project-company">Home Credit × Rakamin Academy · Feb 2026</p>
+            <p class="project-desc">Built a classification model to predict customer loan default risk using EDA and machine learning on Home Credit's customer dataset.</p>
+            <ul class="project-highlights">
+              <li>EDA to identify patterns, anomalies, and feature distributions</li>
+              <li>Full ML pipeline: preprocessing → feature engineering → training → evaluation</li>
+              <li>Implemented using Python and Scikit-learn on Google Colab</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Scikit-learn</span><span class="tag">Google Colab</span><span class="tag">ML</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">💳</div>
+            <p class="img-hint">images/home-credit.png</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">04 — Computer Vision</p>
+            <h3 class="project-title">Facial Skin Type Detection</h3>
+            <p class="project-company">Bangkit Academy Capstone · Nov – Dec 2024</p>
+            <p class="project-desc">Developed a Computer Vision model to classify facial skin types as the ML component of a cross-disciplinary mobile application.</p>
+            <ul class="project-highlights">
+              <li>Image classification using TensorFlow: preprocessing to evaluation</li>
+              <li>Collaborated across ML, Mobile Development, and Cloud Computing teams</li>
+              <li>End-to-end model integration into the team's mobile app</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">TensorFlow</span><span class="tag">Computer Vision</span><span class="tag">Google Colab</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">👁️</div>
+            <p class="img-hint">images/bangkit-capstone.png</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">05 — Data Analytics</p>
+            <h3 class="project-title">Bike-Sharing Analysis Dashboard</h3>
+            <p class="project-company">Dicoding Final Submission · 2024</p>
+            <p class="project-desc">Analyzed a public bike-sharing dataset to identify usage patterns across time, season, and weather, visualized in an interactive dashboard.</p>
+            <ul class="project-highlights">
+              <li>Full EDA: data wrangling, trend analysis, pattern identification</li>
+              <li>Interactive Streamlit dashboard for dynamic data exploration</li>
+              <li>Final submission — Dicoding Data Analysis class</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Streamlit</span><span class="tag">EDA</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">🚲</div>
+            <p class="img-hint">images/bike-sharing.png</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-card-inner">
+          <div class="project-content">
+            <p class="project-num">06 — Business Analytics</p>
+            <h3 class="project-title">Coffee Shop Sales Analysis</h3>
+            <p class="project-company">BNSP Competency Test · 2024</p>
+            <p class="project-desc">Analyzed coffee shop sales data to identify top products, revenue trends, and business patterns — used as the BNSP certification competency test.</p>
+            <ul class="project-highlights">
+              <li>Data analysis and pattern identification using RapidMiner</li>
+              <li>Interactive Power BI dashboard for sales performance overview</li>
+              <li>Contributed to BNSP Associate Data Scientist certification pass</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Power BI</span><span class="tag">RapidMiner</span><span class="tag">Data Visualization</span>
+            </div>
+          </div>
+          <div class="project-img">
+            <div class="img-icon">☕</div>
+            <p class="img-hint">images/coffee-shop.png</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <p class="section-label">Background</p>
+    <h2>Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-date">Feb 2026</div>
+        <div>
+          <div class="timeline-role">Data Scientist Intern</div>
+          <div class="timeline-org">Home Credit × Rakamin Academy — Remote</div>
+          <div class="timeline-desc">Built a credit risk prediction model using Python. Performed EDA, feature engineering, model training, and evaluation on customer credit data.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Jan – Feb 2026</div>
+        <div>
+          <div class="timeline-role">Big Data Analytics Intern</div>
+          <div class="timeline-org">Kimia Farma × Rakamin Academy — Remote</div>
+          <div class="timeline-desc">Analyzed sales transaction data using SQL on BigQuery. Built a KPI dashboard on Looker Studio. Achieved Excellent grade (94.9/100).</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Sep – Dec 2024</div>
+        <div>
+          <div class="timeline-role">Machine Learning Cohort</div>
+          <div class="timeline-org">Bangkit Academy by Google, GoTo & Traveloka — Remote</div>
+          <div class="timeline-desc">Completed an intensive ML training program with avg. score 90.30/100 and 100% attendance. Developed a Computer Vision capstone with a cross-disciplinary team.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-date">Sep – Oct 2023</div>
+        <div>
+          <div class="timeline-role">UI/UX Designer Intern</div>
+          <div class="timeline-org">Luarsekolah — Bandung</div>
+          <div class="timeline-desc">Completed a full UX design cycle in Figma: user flow, wireframing, competitor analysis, and high-fidelity prototype. Final project score: 89.5/100.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-wrap">
+    <p class="section-label">Academic</p>
+    <h2>Education</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">2021 – 2025</div>
+        <div>
+          <div class="timeline-role">B.Sc. Informatics Engineering</div>
+          <div class="timeline-org">Universitas Komputer Indonesia (UNIKOM) — Bandung</div>
+          <div class="timeline-desc">GPA 3.64 / 4.00 &middot; Relevant coursework: Artificial Intelligence, Statistics &amp; Probability, Database Systems, Linear Algebra, Data Structures.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <p class="section-label">Toolkit</p>
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-category">Languages</div>
+        <div class="skill-list">
+          <span class="skill-pill">Python</span><span class="skill-pill">SQL</span>
+          <span class="skill-pill">Java</span><span class="skill-pill">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">ML / AI</div>
+        <div class="skill-list">
+          <span class="skill-pill">Scikit-learn</span><span class="skill-pill">TensorFlow</span>
+          <span class="skill-pill">Computer Vision</span><span class="skill-pill">NLP</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Data</div>
+        <div class="skill-list">
+          <span class="skill-pill">Pandas</span><span class="skill-pill">NumPy</span>
+          <span class="skill-pill">Matplotlib</span><span class="skill-pill">BigQuery</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Visualization</div>
+        <div class="skill-list">
+          <span class="skill-pill">Looker Studio</span><span class="skill-pill">Power BI</span>
+          <span class="skill-pill">Streamlit</span><span class="skill-pill">Figma</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Tools</div>
+        <div class="skill-list">
+          <span class="skill-pill">Google Colab</span><span class="skill-pill">Jupyter</span>
+          <span class="skill-pill">Git / GitHub</span><span class="skill-pill">VS Code</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-category">Soft Skills</div>
+        <div class="skill-list">
+          <span class="skill-pill">Analytical Thinking</span>
+          <span class="skill-pill">Problem Solving</span>
+          <span class="skill-pill">Collaboration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-wrap">
+    <p class="section-label">Credentials</p>
+    <h2>Certifications</h2>
+    <div class="cert-list">
+
+      <!-- BNSP -->
+      <a href="https://drive.google.com/your-bnsp-link" target="_blank" class="cert-item cert-link">
+        <div>
+          <div class="cert-name">Associate Data Scientist</div>
+          <div class="cert-issuer">BNSP — Badan Nasional Sertifikasi Profesi</div>
+        </div>
+        <span class="cert-badge">Valid · Mar 2028 ↗</span>
+      </a>
+
+      <!-- TOEFL -->
+      <a href="https://drive.google.com/your-toefl-link" target="_blank" class="cert-item cert-link">
+        <div>
+          <div class="cert-name">TOEFL ITP — Score: 520</div>
+          <div class="cert-issuer">One Stop English Education</div>
+        </div>
+        <span class="cert-badge">English ↗</span>
+      </a>
+
+      <!-- COURSERA ACCORDION -->
+      <div class="cert-accordion">
+        <button class="cert-accordion-header" onclick="toggleAccordion(this)">
+          <div>
+            <div class="cert-name">Coursera</div>
+            <div class="cert-issuer">10+ courses — Stanford University, DeepLearning.AI, Google</div>
+          </div>
+          <div class="accordion-right">
+            <span class="cert-badge">ML · Data · Cloud</span>
+            <span class="accordion-arrow">↓</span>
+          </div>
+        </button>
+        <div class="cert-accordion-body">
+          <!-- Ganti # dengan URL verifikasi Coursera kamu -->
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Machine Learning Specialization</span>
+            <span class="cert-sub-issuer">Stanford University & DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">TensorFlow: Advanced Techniques Specialization</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Mathematics for ML and Data Science Specialization</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">TensorFlow Data and Deployment</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">DeepLearning.AI TensorFlow Developer</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Build Basic Generative Adversarial Networks</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Structuring Machine Learning Projects</span>
+            <span class="cert-sub-issuer">DeepLearning.AI</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Intro to Generative AI</span>
+            <span class="cert-sub-issuer">Google Cloud</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Google IT Automation with Python</span>
+            <span class="cert-sub-issuer">Google</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- DICODING ACCORDION -->
+      <div class="cert-accordion">
+        <button class="cert-accordion-header" onclick="toggleAccordion(this)">
+          <div>
+            <div class="cert-name">Dicoding</div>
+            <div class="cert-issuer">10+ courses — Machine Learning, Data Analysis, and more</div>
+          </div>
+          <div class="accordion-right">
+            <span class="cert-badge">Active</span>
+            <span class="accordion-arrow">↓</span>
+          </div>
+        </button>
+        <div class="cert-accordion-body">
+          <!-- Ganti # dengan URL sertifikat Dicoding kamu -->
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Belajar Analisis Data dengan Python</span>
+            <span class="cert-sub-issuer">Valid until Oct 2027</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <a href="#" target="_blank" class="cert-sub-item">
+            <span class="cert-sub-name">Belajar Machine Learning untuk Pemula</span>
+            <span class="cert-sub-issuer">Valid until Jan 2029</span>
+            <span class="cert-sub-arrow">↗</span>
+          </a>
+          <!-- Tambahkan sertifikat Dicoding lainnya di sini dengan format yang sama -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-wrap">
+    <p class="section-label">Get in touch</p>
+    <h2 class="contact-heading">Let's connect.</h2>
+    <p class="contact-sub">Open to full-time roles, internships, and interesting data projects.</p>
+    <div class="contact-links">
+      <a href="/cdn-cgi/l/email-protection#c8baa5bdb2a0a7aeaea9ba88afa5a9a1a4e6aba7a5" class="btn btn-primary"><span class="__cf_email__" data-cfemail="20524d555a484f4646415260474d41494c0e434f4d">[email&#160;protected]</span></a>
+      <a href="https://linkedin.com/in/rifqi-sm" target="_blank" class="btn btn-ghost">LinkedIn ↗</a>
+      <a href="https://github.com/" target="_blank
+<script>
+  function toggleAccordion(btn) {
+    const acc = btn.closest('.cert-accordion');
+    acc.classList.toggle('open');
+  }
+</script>
